@@ -9,9 +9,17 @@ import {signoutRouter} from './routes/signout'
 import {signupRouter} from './routes/signup'
 import {errorHandler} from './middlewares/eror-handler'
 import {NotFoundError} from './errors/not-found-error'
+import cookieSession from 'cookie-session'
 
 const app = express()
 app.use(json())
+
+app.use(
+	cookieSession({
+		signed: false,
+		secure: true
+	})
+)
 
 app.use(currentUserRouter)
 app.use(signinRouter)
@@ -29,6 +37,9 @@ app.get('/api/users/currentuser',
 app.use(errorHandler)
 
 const start = async() => {
+	if(!process.env.JWT_KEY) {
+		throw new Error('JWT Secret need define')
+	}
 	try {
 		await mongoose.connect('mongodb://auth-mongo-srv:27017/auth', {
 			useNewUrlParser: true,

@@ -4,6 +4,7 @@ import {RequestValidatorError} from './../errors/request-validation-error'
 import {DatabaseConnectionError} from './../errors/database-connection-error'
 import { User } from '../model/User'
 import { BadRequestError } from '../errors/bad-request-error'
+import jwt from 'jsonwebtoken'
 
 const router = express.Router()
 
@@ -30,12 +31,22 @@ router.post(
 		const existingUser = await User.findOne({email})
 
 		if(existingUser) {
-			throw new BadRequestError();
+			throw new BadRequestError('User already exist!');
 		}
 
 		const user = User.build({email, password})
 		await user.save()
 		console.log('User created success');
+		const userJwt = jwt.sign(
+			{
+				id: user.id,
+				email: user.email
+			}, process.env.JWT_KEY!
+		)
+
+		req.session = {
+			jwt: userJwt
+		}
 		
 		res.status(201).send(user)
     }
