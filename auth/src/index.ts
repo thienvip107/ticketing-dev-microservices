@@ -30,10 +30,6 @@ app.all('*', async(req, res) => {
     throw new NotFoundError()
 })
 
-app.get('/api/users/currentuser',
- (req, res) => {
-    res.send('Hi there');
-})
 app.use(errorHandler)
 
 const start = async() => {
