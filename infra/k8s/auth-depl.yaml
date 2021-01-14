@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: us.gcr.io/tiketing-dev-301204/auth
+          image: thienvip107/auth
           env:
             - name: JWT_KEY
               valueFrom:
