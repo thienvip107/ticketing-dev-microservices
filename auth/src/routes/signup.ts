@@ -1,9 +1,7 @@
 import express, {Request, Response} from 'express'
 import { body, validationResult } from 'express-validator'
-import {RequestValidatorError} from './../errors/request-validation-error'
-import {DatabaseConnectionError} from './../errors/database-connection-error'
+import {RequestValidatorError, BadRequestError} from '@tian-ticketing/common'
 import { User } from '../model/User'
-import { BadRequestError } from '../errors/bad-request-error'
 import jwt from 'jsonwebtoken'
 
 const router = express.Router()

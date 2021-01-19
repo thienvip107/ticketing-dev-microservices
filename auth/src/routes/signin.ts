@@ -1,8 +1,7 @@
 import express, {Request, Response} from 'express'
-import { validateRequest } from '../middlewares/validate-request'
-import { body } from 'express-validator'
+import { validateRequest,BadRequestError } from '@tian-ticketing/common'
+import { body } from 'express-validator'	
 import { User } from '../model/User'
-import { BadRequestError } from '../errors/bad-request-error'
 import { Password } from '../services/password'
 import jwt from 'jsonwebtoken'
 
