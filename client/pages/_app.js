@@ -3,6 +3,7 @@ import buildClient from '../api/build-client'
 import Header from '../components/header'
 
 const AppComponent = ({ Component, pageProps, currentUser }) => {
+	console.log(Component);
   return (
     <div>
       <Header currentUser={currentUser} />
@@ -13,8 +14,8 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
 }
 
 AppComponent.getInitialProps = async appContext => {
-  console.log(appContext.ctx);
   const client = buildClient(appContext.ctx)
+  console.log(client);
   const {data} = await client.get('/api/users/currentuser')
 
   let pageProps = {}

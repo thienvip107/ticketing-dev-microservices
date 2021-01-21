@@ -5,12 +5,12 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
-  local:
-    push: false
-  # googleCloudBuild:
-  #   projectId: tiketing-dev-301204
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: tiketing-dev-301204
   artifacts:
-    - image: thienvip107/auth
+    - image: us.gcr.io/tiketing-dev-301204/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -18,7 +18,7 @@ build:
         manual:
         - src: 'src/**/*.ts'
           dest: .
-    - image: thienvip107/client
+    - image: us.gcr.io/tiketing-dev-301204/client
       context: client
       docker:
         dockerfile: Dockerfile
