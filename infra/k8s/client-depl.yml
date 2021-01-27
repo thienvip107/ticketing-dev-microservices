@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client-srv
-          image: us.gcr.io/tiketing-dev-301204/client
+          image: thienvip107/client
 ---
 apiVersion: v1
 kind: Service
