@@ -7,11 +7,17 @@ deploy:
 build:
   local:
     push: false
-  # googleCloudBuild:
-  #   projectId: tiketing-dev-301204
   artifacts:
     - image: thienvip107/auth
       context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+        - src: 'src/**/*.ts'
+          dest: .
+    - image: thienvip107/tickets
+      context: tickets
       docker:
         dockerfile: Dockerfile
       sync:
